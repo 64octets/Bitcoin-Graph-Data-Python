@@ -22,8 +22,13 @@ get_array1 = get_array_of_values("https://coinbase.com/api/v1/prices/historical?
 get_array2 = get_array_of_values("https://coinbase.com/api/v1/prices/historical?page=2")
 get_array3 = get_array_of_values("https://coinbase.com/api/v1/prices/historical?page=3")
 get_array = get_array1 + get_array2 + get_array3
+fig = plt.figure(figsize=(16, 5.5))
+fig.subplots_adjust(left=0.06)
+fig.subplots_adjust(right=0.97)
 plt.plot(get_array[::-1])
 plt.ylabel('Price ($)')
 plt.xlabel(str(getAverage(get_array)) + ' average')
 plt.title('Bitcoin price over the last ' + str(len(get_array)) + ' blocks')
+plt.autoscale(True)
+
 plt.show()

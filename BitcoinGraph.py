@@ -22,14 +22,19 @@ strings = []
 data = []
 print("How many blocks to get info on? (per 1000)")
 inpu = int(input())
+print('Fetching data')
 for num in range(inpu):
 	strings.append(base_string + str(num))
+counter = 1
 for string in strings:
 	data.append(get_array_of_values(string))
+	print('Found 1000 blocks of data: (' + str(counter) +'/'+ str(inpu) + ')')
+	counter += 1
 final_data = []
+print('Data imported successfully')
 for values in data:
 	final_data += values
-	
+print('Plotting Data')	
 fig = plt.figure(figsize=(16, 5.5))
 fig.subplots_adjust(left=0.06)
 fig.subplots_adjust(right=0.97)

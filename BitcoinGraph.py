@@ -17,18 +17,26 @@ def getAverage(values):
 	for index in values:
 		total += index
 	return total / len(values)
-
-get_array1 = get_array_of_values("https://coinbase.com/api/v1/prices/historical?page=1")
-get_array2 = get_array_of_values("https://coinbase.com/api/v1/prices/historical?page=2")
-get_array3 = get_array_of_values("https://coinbase.com/api/v1/prices/historical?page=3")
-get_array = get_array1 + get_array2 + get_array3
+base_string = "https://coinbase.com/api/v1/prices/historical?page="
+strings = []
+data = []
+print("How many blocks to get info on? (per 1000)")
+inpu = int(input())
+for num in range(inpu):
+	strings.append(base_string + str(num))
+for string in strings:
+	data.append(get_array_of_values(string))
+final_data = []
+for values in data:
+	final_data += values
+	
 fig = plt.figure(figsize=(16, 5.5))
 fig.subplots_adjust(left=0.06)
 fig.subplots_adjust(right=0.97)
-plt.plot(get_array[::-1])
+plt.plot(final_data[::-1])
 plt.ylabel('Price ($)')
-plt.xlabel(str(getAverage(get_array)) + ' average')
-plt.title('Bitcoin price over the last ' + str(len(get_array)) + ' blocks')
+plt.xlabel(str(getAverage(final_data)) + ' average')
+plt.title('Bitcoin price over the last ' + str(len(final_data)) + ' blocks')
 plt.autoscale(True)
 
 plt.show()

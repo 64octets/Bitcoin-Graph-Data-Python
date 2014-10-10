@@ -1,0 +1,3 @@
+numpy
+matplotlib
+python-dateutil==2.2
